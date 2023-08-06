@@ -1,9 +1,27 @@
-Copy code
 <!DOCTYPE html>
 <html>
 <head>
   <title>CANTROL - Population Density Information</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    /* CSS for mobile screens */
+    @media screen and (max-width: 600px) {
+      .video-container {
+        width: 100%;
+        height: auto;
+        padding-bottom: 56.25%; /* Aspect ratio 16:9 for responsive video */
+      }
+
+      .video-container iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      .data-container {
+        display: none; /* Hide data container on mobile */
+      }
+    }
+  </style>
 </head>
 <body>
   <main>
@@ -16,10 +34,10 @@ Copy code
       <iframe id="videoPlayer" src="https://tv.kakao.com/channel/4396059/livelink/60134917" frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="data-container">
-      <h3 class="data-heading">인구 수:</h3>
-      <p class="population-info">5명</p>
-      <h3 class="data-heading">위험도:</h3>
-      <p class="risk-info">매우 위험</p>
+      <h3 class="data-heading">Number of Populations:</h3>
+      <p class="population-info">5 people</p>
+      <h3 class="data-heading">Danger:</h3>
+      <p class="risk-info">Very risky</p>
     </div>
   </main>
   <footer>
