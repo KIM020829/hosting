@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantrol Mobile</title>
     <style>
@@ -24,49 +24,22 @@
             margin: 5px;
             font-size: 18px;
         }
-         .video-container {
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%; /* Aspect ratio 16:9 for responsive video */
-        position: relative;
-        }
-
-        .video-container iframe {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        }
-
         .data-container {
           margin: 0; /* Remove margin for better mobile layout */
           padding: 10px; /* Reduce padding for better mobile layout */
         }
-      }
-  </style>
+    </style>
 </head>
 <body>
   <main>
-   <header>
+    <header>
       <h1 class="team-name">CANTROL</h1>
       <h2 class="subheading">Population Density Information</h2>
     </header>
-    <div class="video-container">
-      <!-- Replace the 'src' attribute with your real-time video stream URL -->
-      <iframe id="videoPlayer" src="https://play-tv.kakao.com/embed/player/livelink/60134971?service=player_share" frameborder="0" allowfullscreen></iframe>
-    </div>
     <div class="data-container">
-      <h3 class="data-heading">Number of Populations:</h3>
-      <p class="population-info">5 people</p>
-      <h3 class="data-heading">Danger:</h3>
-      <p class="risk-info">Very risky</p>
-    </div>
-      <div id="message-box" style="display: none;">
-        <h3 class="data-heading">Number of Populations:</h3>
-        <p id="population-info"></p>
-        <h3 class="data-heading">Danger:</h3>
-        <p id="risk-info"></p>
+      <!-- The message box to display the data -->
+      <div id="message-box">
+        <p id="population-info">0 people</p>
       </div>
     </div>
   </main>
@@ -74,28 +47,20 @@
     <p>© 2023 CANTROL. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript code to handle the message from the Python code -->
+  <!-- JavaScript code to update the message box with the data sent from Python -->
   <script>
-    function handleMessage(event) {
-      const messageBox = document.getElementById("message-box");
+    function updatePopulationInfo(num_people) {
       const populationInfo = document.getElementById("population-info");
-      const riskInfo = document.getElementById("risk-info");
-
-      const message = event.data;
-
-      // Split the message into separate lines
-      const lines = message.split("\n");
-
-      // Update the message box content
-      populationInfo.textContent = lines[0];
-      riskInfo.textContent = lines[1];
-
-      // Show the message box
-      messageBox.style.display = "block";
+      populationInfo.textContent = num_people + " people";
     }
 
     // Listen for messages from the Python code
-    window.addEventListener("message", handleMessage);
+    window.addEventListener("message", function(event) {
+      const data = event.data;
+      if (data.hasOwnProperty("num_people")) {
+        updatePopulationInfo(data.num_people);
+      }
+    });
   </script>
 </body>
 </html>
