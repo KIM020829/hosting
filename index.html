@@ -66,5 +66,21 @@
   <footer>
     <p>© 2023 CANTROL. All rights reserved.</p>
   </footer>
+   <script>
+        // Function to update the message data on the webpage
+        function updateMessage(data) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = data;
+        }
+
+        // Establish a connection to the server using SSE
+        const eventSource = new EventSource('/data-stream');
+
+        // Listen for incoming data from the server
+        eventSource.onmessage = (event) => {
+            const data = event.data;
+            updateMessage(data);
+        };
+    </script>
 </body>
 </html>
