@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cantrol Mobile</title>
     <style>
@@ -48,7 +48,7 @@
 </head>
 <body>
   <main>
-    <header>
+   <header>
       <h1 class="team-name">CANTROL</h1>
       <h2 class="subheading">Population Density Information</h2>
     </header>
@@ -62,25 +62,40 @@
       <h3 class="data-heading">Danger:</h3>
       <p class="risk-info">Very risky</p>
     </div>
+      <div id="message-box" style="display: none;">
+        <h3 class="data-heading">Number of Populations:</h3>
+        <p id="population-info"></p>
+        <h3 class="data-heading">Danger:</h3>
+        <p id="risk-info"></p>
+      </div>
+    </div>
   </main>
   <footer>
     <p>© 2023 CANTROL. All rights reserved.</p>
   </footer>
-   <script>
-        // Function to update the message data on the webpage
-        function updateMessage(data) {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = data;
-        }
 
-        // Establish a connection to the server using SSE
-        const eventSource = new EventSource('/data-stream');
+  <!-- JavaScript code to handle the message from the Python code -->
+  <script>
+    function handleMessage(event) {
+      const messageBox = document.getElementById("message-box");
+      const populationInfo = document.getElementById("population-info");
+      const riskInfo = document.getElementById("risk-info");
 
-        // Listen for incoming data from the server
-        eventSource.onmessage = (event) => {
-            const data = event.data;
-            updateMessage(data);
-        };
-    </script>
+      const message = event.data;
+
+      // Split the message into separate lines
+      const lines = message.split("\n");
+
+      // Update the message box content
+      populationInfo.textContent = lines[0];
+      riskInfo.textContent = lines[1];
+
+      // Show the message box
+      messageBox.style.display = "block";
+    }
+
+    // Listen for messages from the Python code
+    window.addEventListener("message", handleMessage);
+  </script>
 </body>
 </html>
