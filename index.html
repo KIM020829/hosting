@@ -1,38 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cantrol Mobile</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            padding-top: 30px;
-            height: 0;
-            overflow: hidden;
-        }
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+  <title>CANTROL - Population Density Information</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    /* CSS for mobile screens */
+    @media screen and (max-width: 600px) {
+      .video-container {
+        width: 100%;
+        height: auto;
+        padding-bottom: 56.25%; /* Aspect ratio 16:9 for responsive video */
+      }
+
+      .video-container iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      .data-container {
+        display: none; /* Hide data container on mobile */
+      }
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <header>
+      <h1 class="team-name">CANTROL</h1>
+      <h2 class="subheading">Population Density Information</h2>
+    </header>
     <div class="video-container">
-        <!-- Replace "video_url.mp4" with the actual video URL -->
-        <video controls>
-            <source src="https://play-tv.kakao.com/embed/player/livelink/60134971?service=player_share.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+      <!-- Replace the 'src' attribute with your real-time video stream URL -->
+      <iframe id="videoPlayer" src="https://play-tv.kakao.com/embed/player/livelink/60134971?service=player_share" frameborder="0" allowfullscreen></iframe>
     </div>
+    <div class="data-container">
+      <h3 class="data-heading">Number of Populations:</h3>
+      <p class="population-info">5 people</p>
+      <h3 class="data-heading">Danger:</h3>
+      <p class="risk-info">Very risky</p>
+    </div>
+  </main>
+  <footer>
+    <p>© 2023 CANTROL. All rights reserved.</p>
+  </footer>
 </body>
 </html>
